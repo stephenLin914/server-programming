@@ -1,5 +1,5 @@
 // chapter:5-3
-// ./testlisten 192.168.18.137 12345 5；192.168.18.137是本机IP。
+// ./test_listen 192.168.18.137 12345 5；192.168.18.137是本机IP。
 #include <netinet/in.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
@@ -39,10 +39,11 @@ int main(int argc, char* args[]) {
     inet_pton(AF_INET, ip, &address.sin_addr);
     address.sin_port = htons(port);
 
+    // 命名socket
     int ret = bind(sock, (struct sockaddr*) &address, sizeof(address));
     assert(ret != -1);
 
-
+    // 监听socket
     ret = listen(sock, backlog);
     assert(ret != -1);
 
